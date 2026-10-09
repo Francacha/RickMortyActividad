@@ -1,0 +1,424 @@
+/* Estilos globales. Los colores de los componentes vienen del tema de Ant Design (src/theme.js);
+   acá solo va el layout de las páginas y lo que el tema no cubre. */
+
+:root {
+  --portal: #97ce4c;
+  --portal-oscuro: #0b1a0d;
+  --fondo: #0b1114;
+  --borde: #22313a;
+  --texto: #e6efe4;
+  --texto-secundario: rgba(230, 239, 228, 0.68);
+  --display: 'Unbounded Variable', 'Figtree Variable', system-ui, sans-serif;
+  --ease-salida: cubic-bezier(0.16, 1, 0.3, 1);
+
+  color-scheme: dark;
+  background: var(--fondo);
+  scrollbar-color: #2b3c46 var(--fondo);
+}
+
+body {
+  margin: 0;
+  background: var(--fondo);
+  caret-color: var(--portal);
+}
+
+::selection {
+  background: var(--portal);
+  color: var(--portal-oscuro);
+}
+
+:focus-visible {
+  outline: 2px solid var(--portal);
+  outline-offset: 3px;
+}
+
+/* ---------- Estructura ---------- */
+
+.app {
+  min-height: 100svh;
+}
+
+.saltar {
+  position: absolute;
+  left: 16px;
+  top: -48px;
+  z-index: 100;
+  padding: 8px 14px;
+  border-radius: 8px;
+  background: var(--portal);
+  color: var(--portal-oscuro);
+  font-weight: 600;
+}
+
+.saltar:focus {
+  top: 12px;
+}
+
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  border-bottom: 1px solid var(--borde);
+}
+
+.app-header-inner {
+  /* mismo ancho útil que el contenido (1200px menos su padding) */
+  max-width: 1152px;
+  height: 100%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.marca {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--texto);
+  text-decoration: none;
+  flex: none;
+}
+
+.marca:hover {
+  color: var(--texto);
+}
+
+.marca-texto {
+  font-family: var(--display);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.marca-acento {
+  color: var(--portal);
+}
+
+.app-menu {
+  flex: none;
+  border-bottom: none;
+  background: transparent;
+  line-height: 62px;
+}
+
+.app-contenido {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 24px 72px;
+}
+
+.app-contenido:focus {
+  outline: none;
+}
+
+.app-footer {
+  text-align: center;
+  font-size: 13px;
+  color: var(--texto-secundario);
+  border-top: 1px solid var(--borde);
+}
+
+.app-footer a {
+  text-underline-offset: 3px;
+  text-decoration: underline;
+}
+
+/* Títulos con la tipografía display */
+.hero-titulo.ant-typography,
+.pagina-titulo.ant-typography,
+.detalle-nombre.ant-typography,
+.destacados-titulo.ant-typography,
+.ant-result-title {
+  font-family: var(--display);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.pagina-titulo.ant-typography {
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  margin-bottom: 24px;
+}
+
+/* ---------- Inicio ---------- */
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 48px;
+  min-height: min(62vh, 560px);
+}
+
+.hero-titulo.ant-typography {
+  font-size: clamp(2rem, 4.2vw, 3.25rem);
+  line-height: 1.12;
+  margin: 0 0 20px;
+}
+
+.hero-bajada.ant-typography {
+  max-width: 54ch;
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: var(--texto-secundario);
+  margin-bottom: 32px;
+}
+
+.hero-busqueda {
+  max-width: 480px;
+}
+
+.hero-explorar {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 20px;
+  font-weight: 600;
+  text-underline-offset: 4px;
+}
+
+.hero-explorar:hover {
+  text-decoration: underline;
+}
+
+.hero-portal {
+  display: flex;
+  justify-content: center;
+}
+
+.hero-portal-svg {
+  width: min(100%, 360px);
+  height: auto;
+}
+
+.portal-espiral {
+  transform-origin: 32px 32px;
+  animation: girar-portal 40s linear infinite;
+}
+
+@keyframes girar-portal {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .portal-espiral {
+    animation: none;
+  }
+}
+
+.destacados {
+  margin-top: 56px;
+}
+
+.destacados-titulo.ant-typography {
+  font-size: 1.125rem;
+  margin-bottom: 16px;
+}
+
+.destacados-lista {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.destacado-link {
+  display: block;
+  border-radius: 50%;
+  outline: 2px solid transparent;
+  outline-offset: 3px;
+  transition: outline-color 0.2s var(--ease-salida), transform 0.3s var(--ease-salida);
+}
+
+.destacado-link:hover {
+  outline-color: var(--portal);
+  transform: translateY(-2px);
+}
+
+/* ---------- Catálogo ---------- */
+
+.catalogo-controles {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 16px;
+}
+
+.catalogo-busqueda {
+  flex: 1 1 320px;
+  max-width: 480px;
+}
+
+.catalogo-estado.ant-typography {
+  display: block;
+  min-height: 22px;
+  margin: 16px 0 20px;
+  font-variant-numeric: tabular-nums;
+}
+
+.personaje-link {
+  display: block;
+  height: 100%;
+  border-radius: 12px;
+  color: inherit;
+}
+
+.personaje-card {
+  height: 100%;
+  overflow: hidden;
+}
+
+.personaje-portada {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+}
+
+.personaje-portada img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s var(--ease-salida);
+}
+
+.personaje-link:hover .personaje-portada img {
+  transform: scale(1.04);
+}
+
+.personaje-portada .personaje-estado {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  margin: 0;
+  background: rgba(8, 13, 16, 0.88);
+}
+
+.personaje-nombre.ant-typography {
+  display: block;
+  font-size: 1rem;
+}
+
+.personaje-especie.ant-typography {
+  display: block;
+  font-size: 0.875rem;
+}
+
+.estado-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+}
+
+.estado-punto {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.skeleton-portada,
+.skeleton-portada .ant-skeleton-node {
+  display: block;
+  width: 100% !important;
+  height: auto !important;
+  aspect-ratio: 1;
+}
+
+.error-estado {
+  max-width: 640px;
+}
+
+.error-detalle {
+  margin: 0 0 12px;
+}
+
+.vacio {
+  padding: 48px 0;
+}
+
+.vacio .ant-empty-image {
+  height: auto;
+}
+
+.paginacion {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+/* ---------- Detalle ---------- */
+
+.detalle {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.volver {
+  margin: 0 0 24px -8px;
+}
+
+.detalle-imagen {
+  display: block;
+  width: 100%;
+  max-width: 420px;
+  height: auto;
+  aspect-ratio: 1;
+  border-radius: 16px;
+}
+
+.detalle-nombre.ant-typography {
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  line-height: 1.15;
+  margin: 14px 0 28px;
+  overflow-wrap: anywhere;
+}
+
+.detalle-datos .ant-descriptions-item-label {
+  width: 38%;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 860px) {
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    min-height: 0;
+  }
+
+  .hero-portal {
+    order: -1;
+    justify-content: flex-start;
+  }
+
+  .hero-portal-svg {
+    width: 120px;
+  }
+}
+
+@media (max-width: 560px) {
+  .app-header.ant-layout-header {
+    padding: 0 16px;
+  }
+
+  .marca-texto {
+    display: none;
+  }
+
+  .app-contenido {
+    padding: 24px 16px 56px;
+  }
+
+  .catalogo-busqueda {
+    max-width: none;
+  }
+}
